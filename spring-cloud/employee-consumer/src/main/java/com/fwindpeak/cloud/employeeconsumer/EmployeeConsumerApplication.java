@@ -18,7 +18,10 @@ public class EmployeeConsumerApplication {
         ApplicationContext ctx = run(EmployeeConsumerApplication.class, args);
         ConsumerControllerClient consumerControllerClient = ctx.getBean(ConsumerControllerClient.class);
         System.out.println(consumerControllerClient);
-        consumerControllerClient.getEmployee();
+        for (int i = 0; i < 100; i++) {
+            consumerControllerClient.getEmployee();
+        }
+
     }
 
     @Bean
