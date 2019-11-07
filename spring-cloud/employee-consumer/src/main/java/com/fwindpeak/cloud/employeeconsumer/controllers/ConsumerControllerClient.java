@@ -1,20 +1,29 @@
 package com.fwindpeak.cloud.employeeconsumer.controllers;
 
-import java.io.IOException;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.*;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.util.List;
+
 public class ConsumerControllerClient {
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     public void getEmployee() throws RestClientException, IOException {
 
-        String baseUrl = "http://localhost:8080/employee";
+        List<ServiceInstance> instances = discoveryClient.getInstances("employee-producer");
+        ServiceInstance serviceInstance = instances.get(0);
+
+        String baseUrl = serviceInstance.getUri().toString();
+
+        baseUrl = baseUrl + "/employee";
+
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = null;
         try {
