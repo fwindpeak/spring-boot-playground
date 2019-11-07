@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fwindpeak.cloud</groupId>
-    <artifactId>eureka-server</artifactId>
+    <artifactId>employee-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eureka-server</name>
+    <name>employee-consumer</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
